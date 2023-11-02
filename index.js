@@ -1,6 +1,11 @@
 "use strict";
 
-let teams = []; // Define teams in a global scope
+let teams = [ 
+    { code: "DAL", name: "Dallas Cowboys", plays: "Arlington, TX" },
+    { code: "DEN", name: "Denver Broncos", plays: "Denver, CO" },
+    { code: "HOU", name: "Houston Texans", plays: "Houston, TX" },
+    { code: "KAN", name: "Kansas City Chiefs", plays: "Kansas City, MO" },
+];
 
 window.onload = function () {
     initStateDrops();
@@ -15,12 +20,6 @@ window.onload = function () {
 
 function initStateDrops() {
     // load teams //Assign values to the global teams variable
-    teams = [ 
-        { code: "DAL", name: "Dallas Cowboys", plays: "Arlington, TX" },
-        { code: "DEN", name: "Denver Broncos", plays: "Denver, CO" },
-        { code: "HOU", name: "Houston Texans", plays: "Houston, TX" },
-        { code: "KAN", name: "Kansas City Chiefs", plays: "Kansas City, MO" },
-    ];
 
     const selectTeam = document.getElementById("selectTeam");
 
