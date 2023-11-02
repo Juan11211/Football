@@ -22,7 +22,7 @@ function initStateDrops() {
     const selectTeam = document.getElementById("selectTeam");
     
     // Add "Select a team" option
-    let defaultOption = new Option("Select a team", "");
+    let defaultOption = new Option("Select a team");
     selectTeam.appendChild(defaultOption);
     
     for (let i = 0; i < teams.length; i++) {
@@ -30,13 +30,14 @@ function initStateDrops() {
         selectTeam.appendChild(option);
     }
     
-    // Add a change event listener to automatically clear the text
-    selectTeam.addEventListener("change", function() {
+    // Add a change event listener to auto clear the text
+    selectTeam.onchange = function() {
         const teamInfo = document.getElementById("teamInfo");
-        if (selectTeam.value === "") {
-            teamInfo.textContent = ""; // Clear the text when "Select a team" is selected
+    // Clear the text when select a value is selected. 
+        if (selectTeam.value === "Select a team") {
+            teamInfo.textContent = ""; 
         }
-    });
+    };
 }
 
 function submitTeamBtnClicked() {
@@ -51,11 +52,6 @@ function submitTeamBtnClicked() {
         }
     }
 
-    if (selectTeam.value === "") {
-        // The change event listener will already clear the text, so no additional action needed here
-    } else if (selectedTeam) {
         teamInfo.textContent = `You selected the ${selectedTeam.name} - they play in ${selectedTeam.plays}`;
-    } else {
-        teamInfo.textContent = "Invalid team selection";
-    }
+    
 }
