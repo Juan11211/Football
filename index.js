@@ -1,14 +1,21 @@
 "use strict";
 
+let teams = []; // Define teams in a global scope
+
 window.onload = function () {
     initStateDrops();
-    const selectTeam = document.getElementById("selectTeam");
-    selectTeam.onchange = submitTeamBtnClicked;
+    const selectForm = document.getElementById("teamForm");
+
+    selectForm.onsubmit = function(e){
+        e.preventDefault();
+        submitTeamBtnClicked();
+        return false;
+    };
 };
 
 function initStateDrops() {
-    // load teams
-    let teams = [
+    // load teams //Assign values to the global teams variable
+    teams = [ 
         { code: "DAL", name: "Dallas Cowboys", plays: "Arlington, TX" },
         { code: "DEN", name: "Denver Broncos", plays: "Denver, CO" },
         { code: "HOU", name: "Houston Texans", plays: "Houston, TX" },
@@ -25,8 +32,19 @@ function initStateDrops() {
 
 function submitTeamBtnClicked() {
     const selectTeam = document.getElementById("selectTeam");
-    const selectedTeamCode = selectTeam.value;
+    let teamInfo = document.getElementById("teamInfo");
+    let selectedTeam = null;
 
-    console.log(`Selected Team: ${selectedTeamCode}`);
+    for (let i = 0; i < teams.length; i++) {
+        if (teams[i].code === selectTeam.value) {
+            selectedTeam = teams[i];
+            break;
+        }
+    }
+
+    if (selectedTeam) {
+        teamInfo.textContent = `You selected the ${selectedTeam.name} - they play in ${selectedTeam.plays}`;
+    } else {
+        teamInfo.textContent = "Invalid team selection";
+    }
 }
-
